@@ -1,1 +1,12 @@
+<h1>Local Weather</h1>
 <h1>Hello {{name}}</h1>
+<div>
+    <img [src]="statusIcon">
+    <span ng-bind="temperature"></span>
+    <span ng-bind="temperatureUnit"></span>
+</div>
+<div>
+    <span ng-bind="location"></span>
+    <span ng-bind="condition"></span>
+    <span ng-bind="wind"></span>
+</div>
