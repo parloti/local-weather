@@ -1,17 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { Geoposition } from './geoposition';
+import { WeatherService } from './weather.service';
 
 @Component({
+  providers: [WeatherService],
   selector: 'my-app',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 
-interface Geoposition {
-  coords: Coordinates;
-  timestamp: number;
-}
 
-export class AppComponent {
+export class AppComponent implements OnInit {
+  constructor(private weatherService: WeatherService) { }
+
   statusIcon: string;
   temperature: number;
   temperatureUnit: string;
@@ -22,6 +24,10 @@ export class AppComponent {
     console.warn(`ERROR(${err.code}): ${err.message}`);
   };
 
+  getWeatherData(position: Geoposition) {
+    this.weatherService.getWeatherSlowly().then(weather => console.log(weather));
+  }
+
   getLocation() {
     let options: PositionOptions = {
       enableHighAccuracy: true,
@@ -31,11 +37,11 @@ export class AppComponent {
 
     let location = navigator.geolocation;
     if (location) {
-      location.getCurrentPosition(this.getWeatherData, this.error, options);
-    };
-  }
-  getWeatherData(location: Geoposition) {
-
+      location.getCurrentPosition(this.getWeatherData.bind(this), this.error, options);
+    }
+    else {
+      console.error("Geolocation not supported.");
+    }
   }
   ngOnInit() {
     this.getLocation();
