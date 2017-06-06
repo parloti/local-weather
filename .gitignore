@@ -1,4 +1,6 @@
 node_modules
+src/app/**/*.js
+src/app/**/*.map
 
 # Windows image file caches
 Thumbs.db
