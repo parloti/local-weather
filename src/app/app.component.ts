@@ -20,15 +20,16 @@ export class AppComponent implements OnInit {
 
   name = 'Angular';
 
-  error(err: PositionError) {
+  error(err: PositionError): void {
     console.warn(`ERROR(${err.code}): ${err.message}`);
   };
 
-  getWeatherData(position: Geoposition) {
-    this.weatherService.getWeatherSlowly().then(weather => console.log(weather));
+  getWeatherData(position: Geoposition): void {
+    console.log(position);
+    this.weatherService.getWeatherSlowly(position).then(weather => console.log(weather));
   }
 
-  getLocation() {
+  getLocation(): void {
     let options: PositionOptions = {
       enableHighAccuracy: true,
       timeout: 5000,
