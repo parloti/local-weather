@@ -1,12 +1,14 @@
-<h1>Local Weather</h1>
-<h1>Hello {{name}}</h1>
-<div>
-    <img [src]="statusIcon">
-    <span ng-bind="temperature"></span>
-    <span ng-bind="temperatureUnit"></span>
-</div>
-<div>
-    <span ng-bind="location"></span>
-    <span ng-bind="condition"></span>
-    <span ng-bind="wind"></span>
+<div ng-if="weather.available">
+    <h1>Free Code Camp</h1>
+    <h2>Local Weather</h2>
+    <div>
+        <canvas id="icon" width="128" height="128"></canvas>
+        <span [textContent]="round(weather.temperature)"></span>
+        <button [textContent]="weather.unit" (click)="changeUnit()">Save</button>
+    </div>
+    <div>
+        <span [textContent]="weather.location"></span>
+        <span [textContent]="weather.condition"></span>
+        <span [textContent]="weather.wind"></span>
+    </div>
 </div>
