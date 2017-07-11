@@ -1,0 +1,10 @@
+<canvas id="icon" width="32" height="32"></canvas>
+<span>{{temperature | number:'1.1-1'}}</span>
+<div class="btn-group" role="group" aria-label="Unit temperature">
+    <button type="button" class="btn btn-secondary" [ngClass]="unit==='Celsius'?'active':'inactive'" (click)="toCelsius()">
+        &deg;C
+        </button>
+    <button type="button" class="btn btn-secondary " [ngClass]="unit==='Fahrenheit'?'active':'inactive'" (click)="toFahrenheit()">
+        &deg;F
+        </button>
+</div>

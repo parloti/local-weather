@@ -1,0 +1,11 @@
+<span class="fa fa-location-arrow" [ngStyle]="{'transform': 'rotate('+(windDirection-45)+'deg)'}"></span>
+<canvas id="wind" width="32" height="32"></canvas>
+<span>{{speed | number:'1.1-1'}}</span>
+<div class="btn-group" role="group" aria-label="Unit wind">
+    <button type="button" class="btn btn-secondary" [ngClass]="windUnit==='Km/h'?'active':'inactive'" (click)="toKilometersPerHour()">
+        Km/h
+        </button>
+    <button type="button" class="btn btn-secondary " [ngClass]="windUnit==='mi/h'?'active':'inactive'" (click)="toMilesPerHour()">
+        mi/h
+        </button>
+</div>

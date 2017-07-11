@@ -1,29 +1,28 @@
 import { Injectable } from "@angular/core";
+import { Headers, Http } from '@angular/http';
+
+import 'rxjs/add/operator/toPromise';
 
 import { Weather } from './weather';
-import { MockWeather } from './mock-weather';
 import { Geoposition } from './geoposition';
 
 @Injectable()
 export class WeatherService {
-    baseUrl: string = "https://api.darksky.net/forecast/";
-    key: string = "7367ac42e8e4dc971df8a9962aa11964";
-    latitude: number;
-    longitude: number;
+    private baseUrl: string = "https://alexparloti.com/APPs/local-weather/index.php?";
 
-    makeUrlRequest(): string {
-        return this.baseUrl + this.key + "/" + this.latitude + "," + this.longitude;
+    constructor(private http: Http) { }
+
+    public getWeather(coordinates: Coordinates): Promise<Weather> {
+        const url = `${this.baseUrl}latitude=${coordinates.latitude}&longitude=${coordinates.longitude}`;
+
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json() as Weather)
+            .catch(this.handleError);
     }
 
-    getWeather(position: Geoposition): Promise<Weather> {
-        return Promise.resolve(MockWeather);
+    private handleError(error: any): Promise<any> {
+        console.error('An error occurred', error);
+        return Promise.reject(error.message || error);
     }
-
-    getWeatherSlowly(position: Geoposition): Promise<Weather> {
-        return new Promise(resolve => {
-            // Simulate server latency with 2 second delay
-            setTimeout(() => resolve(this.getWeather(position)), 2000);
-        });
-    }
-
 }
