@@ -12,7 +12,7 @@
             tether: 'npm:tether/dist/js/tether.min.js',
             bootstrap: 'npm:bootstrap/dist/js/bootstrap.min.js',
 
-            skycons: 'http://darkskyapp.github.io/skycons/skycons.js'
+            skycons: 'https://darkskyapp.github.io/skycons/skycons.js'
         },
         meta: {
             'bootstrap': {
