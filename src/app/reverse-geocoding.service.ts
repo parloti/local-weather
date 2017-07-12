@@ -1,5 +1,5 @@
-import { Injectable } from "@angular/core";
-import { Headers, Http } from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -8,22 +8,26 @@ import { ReverseGeocode } from './reverse-geocode';
 
 @Injectable()
 export class ReverseGeocodingService {
-    private baseUrl: string = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";
-    private key: string = "AIzaSyCc_xT8XsMNaGifnC44EBLSgK9oqrei9yU";
+    private baseUrl: string = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=';
+    private key: string = 'AIzaSyCc_xT8XsMNaGifnC44EBLSgK9oqrei9yU';
 
 
 
-    private preferredTypes: Array<string[]> = [
-        ["locality", "political"],
-        ["street_address"]
-    ]
+    private preferredAddressTypes: Array<string[]> = [
+        ['locality', 'political'],
+        ['street_address']
+    ];
+
+    private preferredAddressComponents: Array<string[]> = [
+        ['administrative_area_level_3', 'political']
+    ];
 
     constructor(private http: Http) { }
 
     private getReverseGeocode(coordinates: Coordinates): Promise<ReverseGeocode> {
         const latitude: number = coordinates.latitude;
         const longitude: number = coordinates.longitude;
-        const url: string = `${this.baseUrl}${latitude},${longitude}&key=${this.key}`;
+        const url = `${this.baseUrl}${latitude},${longitude}&key=${this.key}`;
 
         return this.http.get(url)
             .toPromise()
@@ -31,8 +35,8 @@ export class ReverseGeocodingService {
             .catch(this.handleError);
     }
 
-    private searchPreferredType(addressTypes: string[]): boolean {
-        let preferredTypes = this.preferredTypes;
+    private searchPreferredAddressType(addressTypes: string[]): boolean {
+        let preferredTypes = this.preferredAddressTypes;
         let preferredType;
         let addressType;
 
@@ -56,7 +60,7 @@ export class ReverseGeocodingService {
 
         city = results.find((result: Address) => {
             let addressTypes: string[] = result.types;
-            return this.searchPreferredType(addressTypes);
+            return this.searchPreferredAddressType(addressTypes);
         });
         if (!city) {
             console.log(results);
@@ -69,12 +73,11 @@ export class ReverseGeocodingService {
         return this.getReverseGeocode(coordinates).then(reverseGeocode => {
             return new Promise((resolve, reject) => {
                 let city: string;
-                if (reverseGeocode.status === "OK") {
+                if (reverseGeocode.status === 'OK') {
                     city = this.filterCity(reverseGeocode.results);
-                }
-                else {
+                } else {
                     console.warn(reverseGeocode);
-                    city = "unknown";
+                    city = 'unknown';
                 }
                 resolve({ city: city });
             });

@@ -1,0 +1,26 @@
+<div ng-if="weather.available" [ngStyle]="{'background-image': 'url(./app/background/' + weather.icon + '.jpg)'}" class="flexbox thematic-background">
+    <div class="info">
+        <h1>Free Code Camp</h1>
+        <h2>Local Weather</h2>
+        <div class="alert alert-warning" *ngIf="error">
+            <strong>Warning!</strong> {{error}}.
+        </div>
+        <section>
+            <temperature [temperature]="weather.temperature" [unit]="weather.unit" (onChangeTemperatureUnit)="onChangeTemperatureUnit($event)"></temperature>
+        </section>
+        <section class="city">
+            <div>
+                <button type="button" class="btn btn-secondary">
+                    <span class="fa fa-map-marker" aria-hidden="true"></span>
+                    <span [textContent]="weather.city">&nbsp;</span>
+                </button>
+                <button type="button" class="btn btn-secondary ">
+                    <span [textContent]="weather.summary">&nbsp;</span>
+                </button>
+            </div>
+        </section>
+        <section>
+            <wind [speed]="weather.wind?.speed" [windUnit]="weather.wind?.unit" [windDirection]="weather.wind?.direction" (onChangeWindSpeedUnit)="onChangeWindSpeedUnit($event)"></wind>
+        </section>
+    </div>
+</div>

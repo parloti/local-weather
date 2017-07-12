@@ -15,22 +15,22 @@ export class Wind {
     @Output() onChangeWindSpeedUnit: EventEmitter<number> = new EventEmitter<number>();
 
     toKilometersPerHour(): void {
-        if (this.windUnit && this.windUnit !== "Km/h") {
+        if (this.windUnit && this.windUnit !== 'Km/h') {
             let speed = this.speed / 0.62137;
             this.onChangeWindSpeedUnit.emit(speed);
         }
     }
 
     toMilesPerHour(): void {
-        if (this.windUnit && this.windUnit !== "mi/h") {
+        if (this.windUnit && this.windUnit !== 'mi/h') {
             let speed = this.speed * 0.62137;
             this.onChangeWindSpeedUnit.emit(speed);
         }
     }
 
     private updateIcon(): void {
-        let skycons = new Skycons({ "color": "#336699" });
-        skycons.add("wind", 'wind');
+        let skycons = new Skycons({ 'color': '#336699' });
+        skycons.add('wind', 'wind');
         skycons.play();
     }
 

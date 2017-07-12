@@ -6,7 +6,8 @@
   System.config({
     paths: {
       // paths serve as alias
-      'npm:': 'node_modules/'
+      //'npm:': 'node_modules/'
+      npm: 'https://unpkg.com/'
     },
     // map tells the System loader where to look for things
     map: {

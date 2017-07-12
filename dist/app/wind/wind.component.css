@@ -1,0 +1,36 @@
+.active{
+    background: rgb(59,143,217);
+    color: white;
+}
+.inative{
+    background: rgb(114, 114, 114);
+}
+.btn-group .btn+.btn{
+    margin-left: 0;
+}
+
+.btn-secondary,
+.btn-secondary:hover {
+    padding: 5px 10px;
+    margin: 0;
+}
+
+*:focus,
+.btn-secondary:focus {
+    outline: none;
+    webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+span{
+    vertical-align: middle;
+    font-size: 26px;
+}
+
+canvas{
+    vertical-align: middle;
+}
+.fa{
+    color: #336699;
+    margin-right: 5px;
+}

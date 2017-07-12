@@ -17,12 +17,9 @@
         meta: {
             'bootstrap': {
                 deps: ['jquery', 'tether']
-            },
-            'main.js': {
-                deps: ['skycons']
             }
         }
     });
 })(this);
 
-System.import('skycons', 'bootstrap').catch(function (err) { console.error(err); });
+SystemJS.import('skycons', 'bootstrap').catch(function (err) { console.error(err); });
